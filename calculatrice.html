@@ -1,0 +1,155 @@
+<html> <!--balise ouvrante du document html--> 
+<head> <!--balise ouvrante qui gere l'en tete de notre document -->
+<title>Calculatrice 2.0</title><!--cette ligne permet de definr le titre notre page html-->
+<script language="javascript">//<!--balise ouvrante permettant de de faire comprendre à ntre document qu'il va rece voir du code javascript-->
+
+let operateur,a,b,n,mr,ms,point=1;//declaration des variables
+let tourClic=false;//declaration et initialisation de la variable tourClic
+alert('cette calculatrice a été réalisée par MARIE-MICHHELLE et NOELLA')//ouvre un infobule dans le navigateur
+
+function saisie(c)//Fonction js qui nous perùmettra de saisir nos operants
+{	
+	if(tourClic)//structure conditionnelle permettant de mettre une condition sur la variable tourClic
+	{
+		tourClic=false;//on donne une valeur à notre variable
+		document.form1.case1.value="";//on cherche la valeur dans notre document "fichier html",dans le selecteur'form1',dans le case1,et on trouve la valeur entrée
+	}
+	document.form1.case1.value +=c;//concatenation des valeurs
+}
+
+function signe(ope)//foction des operations
+{
+	a=parseFloat(document.form1.case1.value);//utilisation de la variable a,en  transformant la valeur chaine de caractere retrouvé à partir de ce chemin document.form1.case1.value en flotannt par la fonction parsefloat
+	operateur=ope;//utilisation et initialisation de la variable operation
+	document.form1.case1.value="";// recuperation de la valeur à partir du chemin etabli
+	tourClic=true;// utilisation de la variable 
+}
+	
+function calcul()//fonction calcul qui nous permettra de calculer 
+{
+	if (operateur == 'puissance')// condition qui verifie si la valeur de notre variable operation est egale à la chaine de caractere  puissance
+	{
+		document.form1.case1.value = Math.pow(a,parseFloat(document.form1.case1.value));//dans un certain boutton retrouvé dansà patir de ce chemin 'document.form1.case1.value' nous y placons des valeurs en utilisant des fonctions mathematique comme "math.pow qui renvoi un nombre à un certaine puissance" et la foction parsetfloat dont nous connaissons deja l'utilité
+	}
+	if (operateur != 'puissance')//condition qui dit que une fois l'operateur est different de la chaine de caractere puissance executez ce code suivant 
+	{
+	document.form1.case1.value = eval("a" +operateur+ parseFloat(document.form1.case1.value));// on insere ctte fois des valeurs modifiées par la fonction mathematique 'eval: qui permet d'evaluer le code js representé sous forme d'une chaine de caractere'
+	tourClic=false;//utilisation de la variable
+	}
+		
+}
+function scientific(n)//fonction permettant d'utiliser les differentes fonctions mathematique 
+{
+	a=parseFloat(document.form1.case1.value);//comme vu on transforme notre chaine de caractere en nombre floatant  par la fonction parsefloat
+
+	switch (n)// le switch etant une maniere de poser une condition de maniere globale, nous allons comparer notre variable 'n' avec differentes valeurs et utiliser les buttons pour y placer des valeurs calculé des fonctions mathematique deja predefinient
+	{ 
+		case 1:document.form1.case1.value = Math.sqrt(a); break;//on recupere la valeur du boutton et on  place la fonction 'math.sqrt'qui renvoie la racine carre du nombre pris en parametre
+		case 2:document.form1.case1.value = Math.abs(a); break;//la focntion 'Math.abs' renvoie la valeur absolue du nombre pris en parametre et on le place dans un bouttons
+		case 3:document.form1.case1.value = Math.PI; break;//comme vous pouvez deviner, la fonction 'math.pi'elle renvoie la valeur de pi
+		case 4:document.form1.case1.value = Math.sin(a); break;//la fonction 'math.sin' renvoie la valeur du sinus d'un nombre pris en paramettre
+		case 5:document.form1.case1.value = Math.cos(a); break;//la fonction 'math.sin' renvoie la valeur du cosinus d'un nombre pris en paramettre
+		case 6:document.form1.case1.value = Math.tan(a); break;//la fonction 'math.sin' renvoie la valeur de la tagente d'un nombre pris en paramettre
+		case 7:document.form1.case1.value = Math.log(a); break;//la fonction 'math.sin' renvoie la valeur du logarithme d'un nombre pris en paramettre
+		case 8:document.form1.case1.value = Math.exp(a); break;//la fonction 'math.sin' renvoie la valeur de l'exposant d'un nombre pris en paramettre
+		case 9:document.form1.case1.value = Math.LN2; break;//elle represente le logarithme naturel de 2
+		case 10:document.form1.case1.value = Math.LN10; break;//elle renvoie le logaritme de 10 
+		case 11:document.form1.case1.value = Math.asin(a); break;//elle renvoie l'arc sin d'un nombre pris en parametre 
+		case 12:document.form1.case1.value = Math.acos(a); break;//elle renvoie l'arc cosinus d'un nombre pris en parametre 
+		case 13:document.form1.case1.value = Math.atan(a); break;//elle renvoie l'arc tangente d'un nombre pris en parametre 
+	}
+}
+function memoire(n)//la foction memoire qui nous permettra de gerer notre memoire 
+{
+	switch (n)//structure conditionnelle
+	{
+		case 1: ms=parseFloat(document.form1.case1.value);document.form1.memory.value=ms; break;//dans ce premier cas on prend notre vrariable et on la met en relation avec un bouton de notre document en y affectant une valeur
+		case 2: document.form1.case1.value=ms; break;// à un bouton  on y affect comme valeur celle de la vriable ms
+	}
+}
+	
+	
+
+</script> <!--balise fermante de notre code js-->
+</head><!--permet de fermer la balise la balise qui gere l'en tete de notre page -->
+<body style="background-color: khaki;"><!--balise permettant de gerer nle contenu de la page ,elle recois des styles css-->
+	<h1>BIENVENU DANS LE MONDE DE LA CACULATRICE</h1><!--permet de d'ecrire sur une ou plusieurs lignes mais en respectant un certain critere de police-->
+<form name="form1"><!--permet d'introduire une forme-->
+<table align="center" border="20" cellspacing="30" cellpadding="10" bgcolor="red"><!--on introduit un tableau dans notre page html tout en lui indiquant un critere de style-->
+	<tr><!--determine les ligne de notre tableau-->
+		<td><!--determine kles cellules de notre tableau-->
+			<input type="text" value="" name="case1"/><!--montre que la cellule sera prise comme un button et que l'on doit y mettre des valeurs-->
+		</td><!--balise fermante -->
+		<td><!--gestion d'une cellule-->
+			<input type="button" value=" C "  onClick="document.form1.case1.value=''"/><!--on determine l'evenement qui doit etre respecté pour notre boutton-->
+			<font size="1" color="#ff0000"> MS <input type="text" size="17" readonly="readonly" value="" name="memory"/><!--on gere un button tout en specifiant sa valeur qui sera detefrminée par notre code js -->			
+		</td><!--balise fermante-->
+	</tr><!--balise fermante-->
+	<tr><!--determine les ligne de notre tableau-->
+		<td align="center" colspan=""><!--gestion d'un cellule-->
+			<input type="button" value=" 1 " onClick="saisie(1)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" 2 " onClick="saisie(2)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" 3 " onClick="saisie(3)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+		<td align="center" colspan="">
+			<input type="button" value=" * " onClick="signe('*')" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" / " onClick="signe('/')" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" + " onClick="signe('+')" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" - " onClick="signe('-')" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" MS " onClick="memoire(1)"style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" MR " onClick="memoire(2) "style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+	</tr><!--balise fermante-->
+		<tr><!--determine les ligne de notre tableau-->
+		<td align="center" colspan=""><!--determine kles cellules de notre tableau-->
+			<input type="button" value=" 4 " onClick="saisie(4)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" 5 " onClick="saisie(5)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" 6 " onClick="saisie(6)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+		<td align="center"><!--determine kles cellules de notre tableau-->
+			<input type="button" value=" mod " onClick="signe('%')" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="  sqrt  " onClick="scientific(1)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="   Pi   " onClick="scientific(3)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="  Abs  " onClick="scientific(2)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+	</tr><!--balise fermante-->
+	<tr><!--determine les ligne de notre tableau-->
+		<td align="center" colspan=""><!--determine kles cellules de notre tableau-->
+			<input type="button" value=" 7 " onClick="saisie(7)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" 8 " onClick="saisie(8)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" 9 " onClick="saisie(9)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+		<td align="center"><!--determine kles cellules de notre tableau-->
+			<input type="button" value="  x^y  " onClick="signe('puissance')" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="  Sin  " onClick="scientific(4)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="  Cos  " onClick="scientific(5)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="  Tan  " onClick="scientific(6)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+	</tr><!--balise fermante-->
+	<tr><!--determine les ligne de notre tableau-->
+		<td align="center" colspan=""><!--determine kles cellules de notre tableau-->
+			<input type="button" value=" 0 " onClick="saisie(0)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" . " onClick="saisie('.')" style="background-color:blue;"/><br><br><br><br><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="  =  " onClick="calcul()" style="background-color:blue;" cellpading="40" cellspacing="5" border="5" /><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+		<td align="center"><!--determine kles cellules de notre tableau-->
+			<input type="button" value="  Log  " onClick="scientific(7)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="  Exp  " onClick="scientific(8)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value="  Ln2  " onClick="scientific(9)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" Ln10 " onClick="scientific(10)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+	</tr><!--balise fermante-->
+	<tr><!--determine les ligne de notre tableau-->
+		<td><!--determine les ligne de notre tableau-->
+		</td><!--balise fermante-->
+		<td align="center" >
+			<input type="button" value=" Asin " onClick="scientific(11)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" Acos " onClick="scientific(12)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" Atan " onClick="scientific(13)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+			<input type="button" value=" Ln10 " onClick="scientific(10)" style="background-color:blue;"/><!--gestion d'un bouton tout en y appliquant du css,des evenements et des valeurs-->
+		</td><!--balise fermante-->
+	</tr><!--balise fermante-->
+</table><!--balise fermante-->
+</form><!--balise fermante-->
+</body><!--balise fermante -->
+</html><!--balise fermante-->
